@@ -1,0 +1,15 @@
+{
+  "name": "msoccasion",
+  "version": "1.0.0",
+  "description": "Website for products sold by MsOccasion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aaron Dalzell",
+  "license": "ISC",
+  "dependencies": {
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1"
+  }
+}
