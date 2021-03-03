@@ -1,0 +1,27 @@
+<% layout("layout/boilerplate")%>
+
+    <h1>Enquiry</h1>
+
+    <form class="mb-3 col-8 offset-2">
+        <div class="mb-3">
+            <label for="firstname" class="form-label">Firstname</label>
+            <input type="text" class="form-control" id="firstname" placeholder="Firstname" required>
+        </div>
+        <div class="mb-3">
+            <label for="lastname" class="form-label">Lastname</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Lastname" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="example@example.com" required>
+        </div>
+        <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" class="form-control" id="subject">
+        </div>
+        <div class="mb-3">
+            <label for="enquiry" class="form-label">Enquiry</label>
+            <textarea class="form-control" name="enquiry" id="enquiry" cols="30" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
