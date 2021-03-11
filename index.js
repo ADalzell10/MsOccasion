@@ -29,8 +29,8 @@ app.get("/products/:id", function (req, res) {
 });
 
 // contact page for customer
-app.get("/contact", function (req, res) {
-    res.render("contact/contact");
+app.get("/enquire", function (req, res) {
+    res.render("contact/enquire");
 });
 
 // root to handle pages which do not exist
