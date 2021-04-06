@@ -9,6 +9,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 // home/welcome page for user
 app.get("/home", function (req, res) {
@@ -21,7 +22,7 @@ app.get("/", function (req, res) {
 
 // product display page
 app.get("/products", function (req, res) {
-    res.render("products/all_products");
+    res.render("products/products");
 });
 
 app.get("/products/:id", function (req, res) {
