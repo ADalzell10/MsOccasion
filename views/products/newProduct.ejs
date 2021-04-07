@@ -1,0 +1,20 @@
+<% layout("layout/boilerplate")%>
+
+<h1>Add a Product</h1>
+<form action="/products" method="POST">
+   <div>
+      <label for="title">Product Name</label>
+      <input type="text" name="product[title]" id="title">
+   </div>
+   <div>
+      <label for="description">Product Description</label>
+      <input type="text" name="product[description]" id="description">
+   </div>
+   <div>
+      <label for="price">Product Price</label>
+      <input type="text" name="product[price]" id="price">
+      <!-- <input type="text" name="product[description]" id="description"> -->
+   </div>
+   <button>Add Product</button>
+   <a href="/products">All Products</a>
+</form>
