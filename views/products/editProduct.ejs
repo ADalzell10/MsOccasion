@@ -1,20 +1,28 @@
 <% layout("layout/boilerplate")%>
 
-<h1>Edit Product</h1>
-<form action="/products/<%= product._id %>?_method=PUT" method="POST">
-   <div>
-      <label for="title">Product Name</label>
-      <input type="text" name="product[title]" id="title" value="<%= product.title %>">
+   <div id="form-display">
+      <div class="form-container">
+         <div class="form-heading">Edit Product</div>
+         <form action="/products/<%= product._id %>?_method=PUT" method="POST">
+            <div class="form-details">
+               <div class="form-inputs">
+                  <label for="title">Product Name</label>
+                  <input type="text" name="product[title]" id="title" placeholder="Product name" value="<%= product.title %>">
+               </div>
+               <div class="form-inputs">
+                  <label for="description">Product Description</label>
+                  <input type="text" name="product[description]" id="description" placeholder="Description" value="<%= product.description %> ">
+               </div>
+               <div class="form-inputs">
+                  <label for="price">Product Price</label>
+                  <input type="text" name="product[price]" id="price" placeholder="Price" value="<%= product.price %> ">
+                  <!-- <input type="text" name="product[description]" id="description"> -->
+               </div>
+            </div>
+            <div class="button">
+               <input type="submit" value="Update Product">
+            </div>
+            <a href="/products/<%= product._id %>">Back to Product</a>
+         </form>
+      </div>
    </div>
-   <div>
-      <label for="description">Product Description</label>
-      <input type="text" name="product[description]" id="description" value="<%= product.description %> ">
-   </div>
-   <div>
-      <label for="price">Product Price</label>
-      <input type="text" name="product[price]" id="price" value="<%= product.price %> ">
-      <!-- <input type="text" name="product[description]" id="description"> -->
-   </div>
-   <button>Update Product</button>
-   <a href="/products/<%= product._id %>">Back to Product</a>
-</form>
