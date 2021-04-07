@@ -2,8 +2,20 @@
 
 <% layout("layout/boilerplate")%>
 
-    <h1>Product Name</h1>
-    <p>Product description</p>
-    <p>Product price</p>
-    <p>Product colour?</p>
-    <a href="/products">Back to All Products</a>
+   <h1>
+      <%= product.title %>
+   </h1>
+   <p>
+      <%= product.description %>
+   </p>
+   <p>
+      <%= product.price %>
+   </p>
+   <!-- <p>Product colour?</p> -->
+   <p>
+      <a href="/products/<%= product._id %>/edit">Edit</a>
+   </p>
+   <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+   <button>Delete Product</button>
+   </form>
+   <a href="/products">Back to All Products</a>
