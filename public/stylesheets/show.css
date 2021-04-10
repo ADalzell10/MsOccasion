@@ -1,0 +1,170 @@
+/* * {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+} */
+
+/* html {
+   font-size: 10px;
+} */
+
+/* ---- image carousel ---- */
+
+.cont {
+   max-width: 800px;
+   width: 100%;
+   margin: 0 auto;
+   padding-top: 10px;
+}
+
+.carousel {
+   align-items: center;
+   display: flex;
+   margin: 2rem auto;
+   overflow: hidden;
+   position: relative;
+   width: 100%;
+}
+
+.carousel-images {
+   display: flex;
+   transform: translateX(0);
+   transition: transform 0.25s;
+}
+
+.carousel-images img {
+   border-radius: 5px;
+}
+
+.carousel-button {
+   background-color: teal;
+   border: none;
+   outline: none;
+   /* makes ciruclar */
+   border-radius: 50%;
+   color: white;
+   cursor: pointer;
+   font-size: 1.5rem;
+   font-weight: bold;
+   height: 3rem;
+   opacity: 0.25;
+   position: absolute;
+   transition: opacity 0.25s;
+   width: 3rem;
+   /* makes button always ontop of image */
+   z-index: 1;
+}
+
+.carousel-button .previous {
+   left: 5px;
+}
+
+.carousel .next {
+   right: 5px;
+}
+
+.carousel-button:hover {
+   opacity: 0.5;
+}
+
+/* image row underneath show image */
+.row {
+   content: "";
+   display: inline-block;
+   clear: both;
+}
+
+.column {
+   float: left;
+   width: 20%;
+   box-sizing: border-box;
+   padding: 2px;
+   transform: translateY(-10px);
+}
+
+.column img {
+   border-radius: 5px;
+}
+
+/* ---- SHOW PAGE ---- */
+
+/* --- PRODUCT DETAILS */
+
+
+div .show-content{
+   margin: 0 auto;
+   max-width: 800px;
+   width: 100%;
+}
+
+.show-header {
+   font-size: 40px;
+   font-weight: bold;
+   border-bottom: 3px solid #a1a1a14b;
+   border-bottom-right-radius: 25px;
+}
+
+.show-title{
+   font-size: 25px;
+   font-weight: bold;
+}
+
+div .divide {
+   border-bottom: 1px solid #a1a1a14b;
+}
+
+.show-buttons a button{
+   width: 48%;
+   height: 50px;
+   outline: none;
+   text-decoration: none;
+   text-align: center;
+   margin: 0 auto;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   font-size: 18px;
+   font-weight: 500;
+   
+   border-radius: 5px;
+   letter-spacing: 1px;
+}
+
+.show-buttons a .edit{
+   float: left;
+   background-color: rgb(134, 164, 133);
+}
+
+.show-buttons a .return{
+   background-color: rgb(95, 158, 160);
+   float: right;
+}
+
+.show-buttons a .edit:hover{
+   background-color: rgb(67, 89, 66);
+}
+
+.show-buttons a .return:hover {
+   background-color: rgb(52, 87, 88);
+}
+
+#delete-button input {
+   margin-top: 30px;
+   height: 100%;
+   width: 100%;
+   outline: none;
+   cursor: pointer;
+   color: #fff;
+   border: none;
+   font-size: 18px;
+   font-weight: 500;
+   border-radius: 5px;
+   letter-spacing: 1px;
+   background-color: rgb(233, 21, 21);
+}
+
+#delete-button input:hover{
+   background-color:rgb(151, 17, 17)
+}
+
+
