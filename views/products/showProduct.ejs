@@ -1,21 +1,89 @@
 <!-- display page for single product -->
 
 <% layout("layout/boilerplate")%>
+   <div>
+      <div class="cont">
+         <div class="carousel">
+            <button class="carousel-button previous" id="previous">&#60;</button>
+            <div class="carousel-images">
+               <img src="https://via.placeholder.com/300" alt="">
+               <img src="https://via.placeholder.com/300" alt="">
+               <img src="https://via.placeholder.com/300" alt="">
+               <img src="https://via.placeholder.com/300" alt="">
+               <img src="https://via.placeholder.com/300" alt="">
+            </div>
+            <button class="carousel-button next" id="next">&#62;</button>
+         </div>
+         <div class="row">
+            <div class="column">
+               <img src="https://via.placeholder.com/300" style="width:100%">
+            </div>
+            <div class="column">
+               <img src="https://via.placeholder.com/300" style="width:100%">
+            </div>
+            <div class="column">
+               <img src="https://via.placeholder.com/300" style="width:100%">
+            </div>
+            <div class="column">
+               <img src="https://via.placeholder.com/300" style="width:100%">
+            </div>
+            <div class="column">
+               <img src="https://via.placeholder.com/300" style="width:100%">
+            </div>
 
-   <h1>
-      <%= product.title %>
-   </h1>
-   <p>
-      <%= product.description %>
-   </p>
-   <p>
-      <%= product.price %>
-   </p>
-   <!-- <p>Product colour?</p> -->
-   <p>
-      <a href="/products/<%= product._id %>/edit">Edit</a>
-   </p>
-   <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
-   <button>Delete Product</button>
-   </form>
-   <a href="/products">Back to All Products</a>
+         </div>
+      </div>
+
+      <!-- 
+   <img src="https://scontent-man2-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/168244990_863722031151553_2522843147298190512_n.jpg?tp=1&_nc_ht=scontent-man2-1.cdninstagram.com&_nc_cat=101&_nc_ohc=dYVNOc7_eIkAX9RAkGZ&edm=APU89FAAAAAA&ccb=7-4&oh=f87f65f0a82f15d8e99d9f3b3907ff4a&oe=60938101&_nc_sid=86f79a" alt="">-->
+      <div class="show-content">
+         <div class="show-header margin-16">
+            <%= product.title %>
+         </div>
+         <div class="divide margin-16">
+            <div class="show-title">Description</div>
+
+            <p>
+               <%= product.description %>
+                  <br>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos libero impedit facere nesciunt
+                  accusantium
+                  id
+                  fugit maiores provident mollitia minima?
+                  <br>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos libero impedit facere nesciunt
+                  accusantium
+                  id
+                  fugit maiores provident mollitia minima?
+            </p>
+         </div>
+         <!-- <p>Details?</p> -->
+         <div class="divide margin-16">
+            <div class="show-title">Price</div>
+            <p>
+               £<%= product.price %>
+            </p>
+         </div>
+
+         <!-- <p>Product colour?</p> -->
+
+         <div>
+            <div class="show-buttons">
+               <a href="/products/<%= product._id %>/edit">
+                  <button class="edit">Edit</button>
+               </a>
+            </div>
+            <div class="show-buttons">
+               <a href="/products">
+                  <button class="return">Back to All Products</button>
+               </a>
+            </div>
+         </div>
+
+         <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+            <div class="margin-32" id="delete-button">
+               <input type="submit" value="Delete Product">
+            </div>
+         </form>
+      </div>
+   </div>
