@@ -7,11 +7,13 @@
             <div class="form-details">
                <div class="form-inputs">
                   <label for="title">Product Name</label>
-                  <input type="text" name="product[title]" id="title" placeholder="Product name" value="<%= product.title %>">
+                  <input type="text" name="product[title]" id="title" placeholder="Product name"
+                     value="<%= product.title %>">
                </div>
                <div class="form-inputs">
                   <label for="description">Product Description</label>
-                  <input type="text" name="product[description]" id="description" placeholder="Description" value="<%= product.description %> ">
+                  <input type="text" name="product[description]" id="description" placeholder="Description"
+                     value="<%= product.description %> ">
                </div>
                <div class="form-inputs">
                   <label for="price">Product Price</label>
@@ -22,7 +24,11 @@
             <div class="button">
                <input type="submit" value="Update Product">
             </div>
-            <a href="/products/<%= product._id %>">Back to Product</a>
          </form>
+         <div class="show-buttons">
+            <a href="/products/<%= product._id %>">
+               <button class="return-product">Back to Product</button>
+            </a>
+         </div>
       </div>
    </div>
