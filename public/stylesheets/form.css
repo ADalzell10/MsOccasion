@@ -65,6 +65,7 @@ form .button input{
    width: 100%;
    outline: none;
    color: #fff;
+   cursor: pointer;
    border: none;
    font-size: 18px;
    font-weight: 500;
@@ -76,6 +77,18 @@ form .button input{
 form .button input:hover{
    background-color: rgb(67, 89, 66);
 }
+
+.show-buttons a .return-new, 
+.show-buttons a .return-product{
+   background-color: rgb(95, 158, 160);
+   width: 100%;
+}
+
+.show-buttons a .return-new:hover,
+.show-buttons a .return-product:hover {
+   background-color: rgb(52, 87, 88);
+}
+
 
 /* moves items into single lines */
 
