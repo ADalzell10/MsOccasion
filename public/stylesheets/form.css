@@ -15,7 +15,7 @@
    border-radius: 5px;
 }
 
-.form-container .form-heading {
+.form-heading {
    font-size: 25px;
    font-weight: 500;
 }
@@ -27,13 +27,15 @@
    margin: 20px 0 12px 0;
 }
 
-form .form-details .form-inputs {
+.form-inputs {
    margin-bottom: 15px;
+   padding-bottom: 20px;
    width: calc(100% / 2 - 20px);
+   position: relative;
 }
 
-.form-details .form-inputs label {
-   display: block;
+.form-inputs label {
+   display: inline-block;
    font-size: 16px;
    font-weight: 500;
    margin-bottom: 5px;
@@ -46,7 +48,8 @@ form .form-details .form-inputs {
    border-radius: 5px;
    border: 1px solid #ccc;
    box-sizing: border-box;
-   padding-left: 15px;
+   padding: 10px;
+   
    font-size: 16px;
    border-bottom-width: 2px;
 }
@@ -54,6 +57,49 @@ form .form-details .form-inputs {
 .form-details .form-inputs input:focus{
    border-color: rgb(134, 164, 133);
 }
+
+/* display error of success of validation */
+
+.form-inputs.success input{
+   border-color: #2ecc71;
+   
+}
+
+.form-inputs.error input{
+   border-color: #e71c3c;
+
+}
+
+.form-inputs i {
+   position: absolute;
+   top: 45px;
+   right: 10px;
+   visibility: hidden;
+}
+
+.form-inputs.success i.fa-check-circle{
+   visibility: visible;
+   color: #2ecc71;
+}
+
+.form-inputs.error i.fa-exclamation-circle{
+   visibility: visible;
+   color: #e71c3c;
+}
+
+.form-inputs small{
+   visibility: hidden;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+}
+
+.form-inputs.error small {
+   color: red;
+   visibility: visible;
+}
+
+/* --------------------- */
 
 form .button {
    height: 45px;
