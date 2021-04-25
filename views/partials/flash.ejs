@@ -1,0 +1,16 @@
+<!-- Will only display either message if it exists -->
+
+<% if(success && success.length){ %>
+   <div>
+      <%= success %>
+   </div>
+<% } %>
+
+<% if(error && error.length){ %>
+   <div>
+      <%= error %>
+   </div>
+<% } %>
+
+<!-- styling to be added, good examp: 
+   https://www.youtube.com/watch?v=hm79I2JpwJw&ab_channel=CodingNepal -->
