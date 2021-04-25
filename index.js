@@ -1,18 +1,16 @@
 const express = require("express");
-const ejsMate = require("ejs-mate");
-const { productSchema } = require("./schemas.js");
-// wraps async function in try catch
-const catchAsync = require('./utils/catchAsync');
-// catchs errors and reports a message
-const ExpressError = require('./utils/ExpressError');
 const path = require("path");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate");
+const session = require("express-session");
+// flash msg on action
+const flash = require("connect-flash");
+// catchs errors and reports a message
+const ExpressError = require('./utils/ExpressError');
 // allows product info to be deleted by overriding method
 const methodOverride = require("method-override")
 
-// mongoose product mondel
-const Product = require('./models/product');
-const { statSync } = require("fs");
+const products = require("./routes/products");
 
 // connecting db
 mongoose.connect('mongodb://localhost:27017/msoccasion', {
@@ -42,16 +40,37 @@ app.use(methodOverride("_method"));
 // public directory includes js and css files
 app.use(express.static(__dirname + '/public'));
 
-// server side validation using Joi
-const validateProduct = function (req, res, next) {
-   const { error } = productSchema.validate(req.body);
-   if (error) {
-      const msg = error.details.map(el => el.message).join(",")
-      throw new ExpressError(msg, 400);
-   } else {
-      next();
+const sessionConfig = {
+   // store,
+   // name: "sessionDaz",
+   // secret: secret,
+   secret: "secretdaz",
+   resave: false,
+   saveUninitialized: true,
+   cookie: {
+      httpOnly: true,
+       //   works under https
+       //   secure: true,
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7
    }
 }
+app.use(session(sessionConfig))
+app.use(flash());
+
+app.use(function(req, res, next){
+   // gives access to error/success messages if any are added
+   res.locals.success = req.flash("success");
+   res.locals.error = req.flash("error");
+   next();
+})
+
+app.use("/products", products);
+
+// ********************************************************************
+//                               ROUTES 
+// ********************************************************************
+
 
 // home/welcome page for user
 app.get("/home", function (req, res) {
@@ -62,54 +81,10 @@ app.get("/", function (req, res) {
    res.render("home");
 });
 
-// product display page
-app.get("/products", catchAsync(async function (req, res) {
-   const products = await Product.find({});
-   res.render("products/index", { products });
-}));
-
-// Renders form to add a new product to site
-app.get("/products/new", function (req, res) {
-   res.render("products/newProduct");
-});
-
 // contact page for customer
 app.get("/enquire", function (req, res) {
    res.render("contact/enquire");
 });
-
-// Saves a newly created product to the db and displays on index
-app.post("/products", validateProduct, catchAsync(async function (req, res) {
-   const product = new Product(req.body.product);
-   await product.save();
-   res.redirect(`/products/${product._id}`);
-}))
-
-// Displays show page for a product
-app.get("/products/:id", catchAsync(async function (req, res) {
-   const product = await Product.findById(req.params.id);
-   res.render("products/showProduct", { product });
-}));
-
-// Renders the edit form for a current product
-app.get("/products/:id/edit", catchAsync(async function (req, res) {
-   const product = await Product.findById(req.params.id);
-   res.render("products/editProduct", { product });
-}));
-
-// Send a put request to update the information received from the update form
-app.put("/products/:id", validateProduct, catchAsync(async function (req, res) {
-   const { id } = req.params;
-   const product = await Product.findByIdAndUpdate(id, { ...req.body.product });
-   res.redirect(`/products/${product._id}`);
-}));
-
-// Will look up the product by id and delete from DB
-app.delete("/products/:id", catchAsync(async function (req, res) {
-   const { id } = req.params;
-   await Product.findByIdAndDelete(id);
-   res.redirect("/products");
-}));
 
 // root to handle pages which do not exist
 app.all("*", function (req, res, next) {
