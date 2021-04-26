@@ -9,8 +9,12 @@ const flash = require("connect-flash");
 const ExpressError = require('./utils/ExpressError');
 // allows product info to be deleted by overriding method
 const methodOverride = require("method-override")
+const passport = require("passport");
+const passportLocal = require("passport-local");
+const User = require("./models/user");
 
-const products = require("./routes/products");
+const userRoutes = require("./routes/users");
+const productRoutes = require("./routes/products");
 
 // connecting db
 mongoose.connect('mongodb://localhost:27017/msoccasion', {
@@ -55,17 +59,28 @@ const sessionConfig = {
       maxAge: 1000 * 60 * 60 * 24 * 7
    }
 }
-app.use(session(sessionConfig))
+app.use(session(sessionConfig));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new passportLocal(User.authenticate()));
+
+// storing the user in the session
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
    // gives access to error/success messages if any are added
    res.locals.success = req.flash("success");
    res.locals.error = req.flash("error");
    next();
 })
 
-app.use("/products", products);
+app.use("/", userRoutes);
+app.use("/products", productRoutes);
 
 // ********************************************************************
 //                               ROUTES 

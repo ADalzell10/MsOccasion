@@ -1,12 +1,22 @@
+<!-- navbar display -->
+
 <nav>
-   <div class="navbar">
-      <div class="navbar-name">
-         <a class="nav-options" href="/">Miss O'ccasion</a>
-      </div>
-      <div class="navbar-right">
-         <a class="nav-options" href="/">Home</a>
-         <a class="nav-options" href="/products">Products</a>
-         <a class="nav-options" href="/enquire">Contact</a>
+   <div class="navbar margin-8">
+      <div class="nav-container">
+         <div class="navbar-name">
+            <a class="nav-options" href="/">Miss O'ccasion</a>
+         </div>
+         <div class="navbar-right">
+            <a class="nav-options" href="/">Home</a>
+            <a class="nav-options" href="/products">Products</a>
+            <a class="nav-options" href="/enquire">Contact</a>
+            <% if(!currentUser) { %>
+               <a class="nav-options" href="/login">Login</a>
+               <a class="nav-options" href="/register">Register</a>
+            <% } else { %>
+               <a class="nav-options" href="/logout">Logout</a>
+            <% } %>
+         </div>
       </div>
    </div>
 </nav>
