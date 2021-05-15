@@ -7,44 +7,22 @@ const router = express.Router();
 const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
+const users = require("../controllers/users")
 // const users = require("../controllers/users")
 
-router.get("/register", function (req, res) {
-   res.render("users/register");
-});
+router.route("/register")
+   // renders register form
+   .get(users.registerForm)
+   // registers a new user
+   .post(catchAsync(users.register));
 
-router.post("/register", catchAsync(async function (req, res, next) {
-   const { email, username, password } = req.body;
-   const user = new User({ email, username });
-   const registeredUser = await User.register(user, password);
-   // logs in user as soon as they register
-   req.login(registeredUser, function(err){
-      if(err) return next(err);
-   })
-   res.redirect("/products");
-}));
+router.route("/login")
+   // renders login form
+   .get(users.loginForm)
+   // logs user in
+   .post(passport.authenticate("local", { failureFlash: true, failureRedirect: "/login" }), users.login)
 
-router.get("/login", function (req, res) {
-   res.render("users/login");
-})
-
-router.post("/login", passport.authenticate("local", { failureFlash: true, failureRedirect: "/login" }), function (req, res) {
-   req.flash("success", "Welcome back");
-   // redirects to orginal url the user was at before the 
-   // login was prompted, followed by removing the returnTo value
-   const redirectUrl = req.session.returnTo || "/products";
-   delete req.session.returnTo;
-   res.redirect(redirectUrl);
-})
-
-// router.route("/login")
-//     .get(users.renderLogin)
-//     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.login)
-
-router.get('/logout', function(req, res){
-   req.logout();
-   req.flash("success", "Successfully logged out.")
-   res.redirect("/products");
-})
+// logs user out
+router.get("/logout", users.logout)
 
 module.exports = router;
