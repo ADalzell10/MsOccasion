@@ -9,6 +9,10 @@ const products = require("../controllers/products");
 const catchAsync = require('../utils/catchAsync');
 // middleware
 const { isLoggedIn, validateProduct, isAuthor } = require("../middleware");
+// used to capture multipart form data file uploads
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 // mongoose product model
 const Product = require('../models/product');
@@ -17,8 +21,8 @@ router.route("/")
    // product display page
    .get(catchAsync(products.index))
    // Saves a newly created product to the db and displays on index
-   .post(isLoggedIn, validateProduct, catchAsync(products.createProduct));
-
+   // .post(isLoggedIn, validateProduct, upload.array("image"), catchAsync(products.createProduct));
+   .post(isLoggedIn, upload.array("image"), validateProduct, catchAsync(products.createProduct));
 
 // Renders form to add a new product to site
 router.get("/new", isLoggedIn, products.newProductForm);
@@ -27,7 +31,7 @@ router.route("/:id")
    // Displays show page for a product
    .get(catchAsync(products.showProduct))
    // Send a put request to update the information received from the update form
-   .put(isLoggedIn, isAuthor, validateProduct, catchAsync(products.updateProduct))
+   .put(isLoggedIn, isAuthor, upload.array("image"), validateProduct, catchAsync(products.updateProduct))
    // Will look up the product by id and delete from DB
    .delete(isLoggedIn, isAuthor, catchAsync(products.deleteProduct));
 

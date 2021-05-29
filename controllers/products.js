@@ -1,5 +1,6 @@
 // mongoose product model
 const Product = require('../models/product');
+const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async function (req, res) {
    const products = await Product.find({});
@@ -12,6 +13,7 @@ module.exports.newProductForm = function (req, res) {
 
 module.exports.createProduct = async function (req, res) {
    const product = new Product(req.body.product);
+   product.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
    product.author = req.user._id;
    await product.save();
    req.flash("success", "New Product Added!");
@@ -41,6 +43,17 @@ module.exports.editProductForm = async function (req, res) {
 module.exports.updateProduct = async function (req, res) {
    const { id } = req.params;
    const product = await Product.findByIdAndUpdate(id, { ...req.body.product });
+   const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+   // spreads the images into the array to update those displayed
+   product.images.push(...imgs);
+   await product.save();
+   // selecting the images by filename that match those selected by user to remove from database
+   if (req.body.deleteImages) {
+      for(let filename of req.body.deleteImages){
+         await cloudinary.uploader.destroy(filename);
+      }
+      await product.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+   }
    req.flash("success", "Product Updated!");
    res.redirect(`/products/${product._id}`);
 }

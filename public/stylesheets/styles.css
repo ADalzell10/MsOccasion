@@ -124,3 +124,11 @@ body {
    border-radius: 20px 20px 0 0;
 }
 
+.thumbnail {
+   padding: 0;
+   margin: 0;
+   display: block;
+   width: 150px; /* Set a small width */
+   box-sizing: border-box;
+}
+
